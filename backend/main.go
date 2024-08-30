@@ -10,6 +10,7 @@ import (
 	"crowdfunding/service"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 func main() {
@@ -58,6 +59,6 @@ func main() {
 	api.POST("/transactions", authMiddleware, transactionController.Create)
 	api.POST("/transactions/notification", transactionController.GetNotification)
 
-	err := router.Run("localhost:3000")
+	err := router.Run(os.Getenv("DOMAIN"))
 	helper.PanicIfError(err)
 }
